@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/app.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
@@ -33,12 +33,21 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.scss$/,
+        exclude: path.resolve(__dirname, 'src/styles'),
+        loader: 'style!css?modules&localIdentName=[name]__[local]!sass?sourceMap=true',
+      }, {
+        test: /\.scss$/,
+        include: path.resolve(__dirname, 'src/styles'),
+        loader: 'style!css!sass?sourceMap=true',
       }
     ]
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: "./public/index.html",
       filename: "./index.html"
     })
   ]

@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import style from './style.css'
+import 'normalize.css'
+import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 const Index = () => {
-  return <div className={style.hello}>Hello React!11</div>;
+  return <div>Hello React!</div>;
 };
 
 ReactDOM.render(<Index />, document.getElementById("index"));
