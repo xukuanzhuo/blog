@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/app.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -50,5 +51,8 @@ module.exports = {
       template: "./public/index.html",
       filename: "./index.html"
     })
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true
+  }
 }

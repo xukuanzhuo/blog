@@ -1,11 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import routes from './routes/'
 import 'normalize.css'
-import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
-
-ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.render(routes, document.getElementById("app"))
