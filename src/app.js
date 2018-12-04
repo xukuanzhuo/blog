@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import routes from './routes/'
+import Routes from './routes/'
 import 'normalize.css'
 
-ReactDOM.render(routes, document.getElementById("app"))
+ReactDOM.render(Routes, document.getElementById("app"))
