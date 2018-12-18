@@ -3,18 +3,18 @@ import { Provider } from 'react-redux'
  import { ConnectedRouter } from 'react-router-redux'
 import { Router, Route, Switch } from "react-router-dom"
 import createBrowserHistory from "history/createBrowserHistory"
-
 import store from '../store'
 
-import Home from '../views/Home'
-import Detail from '../views/Detail'
+import styles from '../styles/app.css'
+import Home from '../pages/Home'
+import Detail from '../pages/Detail'
 
 const history = createBrowserHistory()
 
 const Routes = (
   <Provider store={store}>
     <Router history={history}>
-      <div>
+      <div className={ styles.pageContainer }>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/detail/:id" component={Detail} />

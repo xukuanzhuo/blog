@@ -1,0 +1,40 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.avatorContainer {
+  width: 230px;
+}
+
+.articlesContainer {
+  width: calc(100% - 230px);
+}
+
+@media only screen and (min-width: 980px) {
+  .avatorContainer {
+    width: 230px;
+  }
+  .articlesContainer {
+    width: calc(100% - 230px);
+  }
+}
+
+@media (min-width: 414px) and (max-width: 768px) {
+  .avatorContainer {
+    width: 180px;
+  }
+  .articlesContainer {
+    width: calc(100% - 180px);
+  }
+}
+
+@media (max-width: 414px) {
+  .avatorContainer {
+    width: 100%;
+  }
+  .articlesContainer {
+    width: 100%;
+  }
+}
