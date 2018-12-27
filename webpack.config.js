@@ -8,6 +8,15 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css'],
+    alias: {
+      src: path.resolve(__dirname, 'src/'),
+      styles: path.resolve(__dirname, 'src/styles/'),
+      pages: path.resolve(__dirname, 'src/pages/'),
+      utils: path.resolve(__dirname, 'src/utils/')
+    }
+  },
   module: {
     rules: [
       {

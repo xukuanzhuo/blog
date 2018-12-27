@@ -1,0 +1,27 @@
+@value variables: 'styles/variables.css';
+@value baseText from variables;
+
+.avatorContainer {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.avatorImg {
+  max-width: 120px;
+  margin: 0 auto;
+  padding: 2px;
+  border: 1px solid #eeeeee;
+}
+
+.avatorInfo {
+  padding: 10px;
+}
+
+.avatorName {
+  margin: 0;
+}
+
+.avatorDesc {
+  font-size: 14px;
+  color: #999999;
+}

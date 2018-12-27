@@ -5,19 +5,20 @@
 }
 
 .avatorContainer {
-  width: 230px;
+  width: 240px;
 }
 
 .articlesContainer {
-  width: calc(100% - 230px);
+  width: calc(100% - 240px);
+  padding: 6px;
 }
 
 @media only screen and (min-width: 980px) {
   .avatorContainer {
-    width: 230px;
+    width: 240px;
   }
   .articlesContainer {
-    width: calc(100% - 230px);
+    width: calc(100% - 240px);
   }
 }
 
