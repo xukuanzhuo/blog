@@ -1,11 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import 'normalize.css'
-import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Routes from './routes/'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import 'styles/app.css'
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
+library.add(faIgloo)
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.render(
+  Routes,
+  document.getElementById("app")
+)

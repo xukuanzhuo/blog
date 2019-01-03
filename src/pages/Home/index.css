@@ -1,0 +1,44 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.avatorContainer {
+  width: 240px;
+  text-align: center;
+  padding: 20px 10px;
+  background-color: #ffffff;
+}
+
+.articlesContainer {
+  width: calc(100% - 240px);
+  padding: 6px;
+}
+
+@media only screen and (min-width: 980px) {
+  .avatorContainer {
+    width: 240px;
+  }
+  .articlesContainer {
+    width: calc(100% - 240px);
+  }
+}
+
+@media (min-width: 414px) and (max-width: 768px) {
+  .avatorContainer {
+    width: 180px;
+  }
+  .articlesContainer {
+    width: calc(100% - 180px);
+  }
+}
+
+@media (max-width: 414px) {
+  .avatorContainer {
+    width: 100%;
+  }
+  .articlesContainer {
+    width: 100%;
+  }
+}
