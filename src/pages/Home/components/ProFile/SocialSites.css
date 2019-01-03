@@ -1,0 +1,8 @@
+@value variables: 'styles/variables.css';
+@value baseText from variables;
+
+.socialSitesContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 15%;
+}

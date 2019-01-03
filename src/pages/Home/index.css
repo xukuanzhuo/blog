@@ -6,6 +6,9 @@
 
 .avatorContainer {
   width: 240px;
+  text-align: center;
+  padding: 20px 10px;
+  background-color: #ffffff;
 }
 
 .articlesContainer {
