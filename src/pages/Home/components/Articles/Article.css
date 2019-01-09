@@ -13,12 +13,16 @@
 }
 
 .articleSubContent {
+  max-height: 190px;
   padding: 10px 0;
+  overflow: hidden;
+
   line-height: 1.6;
   font-size: 14px;
   color: ArticleContent;
 }
 
 .articleFooter {
+  font-size: 12px;
   color: ArticleFooter;
 }
