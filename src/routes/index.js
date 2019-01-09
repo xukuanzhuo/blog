@@ -5,9 +5,9 @@ import { Router, Route, Switch } from "react-router-dom"
 import createBrowserHistory from "history/createBrowserHistory"
 import store from '../store'
 
-import styles from '../styles/app.css'
-import Home from '../pages/Home'
-import Detail from '../pages/Detail'
+import styles from 'styles/app.css'
+import Home from 'pages/Home'
+import Detail from 'pages/Articles/Article.js'
 
 const history = createBrowserHistory()
 
@@ -17,7 +17,7 @@ const Routes = (
       <div className={ styles.pageContainer }>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/detail/:id" component={Detail} />
+          <Route exact path="/articles/:id" component={Detail} />
         </Switch>
       </div>
     </Router>

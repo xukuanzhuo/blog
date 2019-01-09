@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './Article.css'
+import showdown from 'showdown'
+
+const convert = new showdown.Converter()
 
 class Article extends Component {
+  constructor (props) {
+    super(props)
+  }
+
   render() {
+    const issue = this.props.issue
+
     return (
-      <div>
-        article
-      </div>
-    );
+      <article styleName="articleContainer">
+        <header>
+          <h1 styleName="articleHeaderTitle">{ issue.title }</h1>
+        </header>
+        <section styleName="articleSubContent" dangerouslySetInnerHTML={{ __html: convert.makeHtml(issue.body) }}>
+        </section>
+        <div styleName="articleFooter">
+          <span>{ issue.user.login }</span>
+          <span> { issue.updatedAt }</span>
+        </div>
+      </article>
+    )
   }
 }
 

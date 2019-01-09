@@ -1,0 +1,28 @@
+@value variables: 'styles/variables.css';
+@value ArticleBg, ArticleTitle, ArticleContent, ArticleFooter from variables;
+
+.articleContainer {
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #ffffff;
+}
+
+.articleHeaderTitle {
+  font-size: 18px;
+  color: ArticleTitle;
+}
+
+.articleSubContent {
+  max-height: 190px;
+  padding: 10px 0;
+  overflow: hidden;
+
+  line-height: 1.6;
+  font-size: 14px;
+  color: ArticleContent;
+}
+
+.articleFooter {
+  font-size: 12px;
+  color: ArticleFooter;
+}
