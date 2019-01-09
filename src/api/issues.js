@@ -7,3 +7,10 @@ export function getBlogIssues (params) {
     params: params
   })
 }
+
+export function getBlogIssue (number) {
+  return request({
+    url: `/repos/xukuanzhuo/xukuanzhuo.github.io/issues/${number}`,
+    method: 'get'
+  })
+}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { markdown } from 'markdown'
 import CSSModules from 'react-css-modules'
 import styles from './Article.css'
+import showdown from 'showdown'
+
+const convert = new showdown.Converter()
 
 class Article extends Component {
   constructor (props) {
@@ -16,7 +18,7 @@ class Article extends Component {
         <header>
           <h1 styleName="articleHeaderTitle">{ issue.title }</h1>
         </header>
-        <section styleName="articleSubContent" dangerouslySetInnerHTML={{ __html: markdown.toHTML(issue.body) }}>
+        <section styleName="articleSubContent" dangerouslySetInnerHTML={{ __html: convert.makeHtml(issue.body) }}>
         </section>
         <div styleName="articleFooter">
           <span>{ issue.user.login }</span>
