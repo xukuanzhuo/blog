@@ -8,6 +8,8 @@ class ArtilceList extends Component {
     return (
       <div>
         <Article />
+        <Article />
+        <Article />
       </div>
     );
   }

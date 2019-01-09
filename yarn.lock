@@ -3959,10 +3959,10 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-css-modules@^4.7.7:
-  version "4.7.7"
-  resolved "https://registry.yarnpkg.com/react-css-modules/-/react-css-modules-4.7.7.tgz#ce9a9f9d26a271379cd646663b752ca1ff4193be"
-  integrity sha512-0gbyY22B/dT4pSGa44IpQU9LNJPjQXvjDC9Ge8tppAcuDK+CnMw50PVhyfifs8jGc8e+/SomMgAG4Ja0hVErOg==
+react-css-modules@^4.7.9:
+  version "4.7.9"
+  resolved "https://registry.yarnpkg.com/react-css-modules/-/react-css-modules-4.7.9.tgz#459235e149a0df7a62b092ae079d53cb0b6154ee"
+  integrity sha512-IGilzBffKHk0PFLb4cTbqqptXJcDmXTZPQ2rEVvd03zDXT88QyGVPYSQK0j7TYx8xFi3pK4EGDhaKYG5TXGpwg==
   dependencies:
     hoist-non-react-statics "^2.5.5"
     lodash "^4.16.6"
