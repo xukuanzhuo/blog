@@ -8,6 +8,7 @@ import store from '../store'
 import styles from 'styles/app.css'
 import Home from 'pages/Home'
 import Detail from 'pages/Articles/Article.js'
+import Editor from 'pages/Editor/Editor.js'
 
 const history = createBrowserHistory()
 
@@ -18,6 +19,7 @@ const Routes = (
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/articles/:id" component={Detail} />
+          <Route exact path="/editor" component={Editor} />
         </Switch>
       </div>
     </Router>
