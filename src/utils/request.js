@@ -6,12 +6,10 @@ const service = axios.create({
   timeout: 15000
 })
 
-const OAUTH_TOKEN = 'd7dc966328824bec15d2146fbeb3cce3d57fa2ff'
-
 service.interceptors.request.use(config => {
   config.params = decamelizeKeys(config.params)
 
-  config.headers['Authorization'] = `token ${OAUTH_TOKEN}`
+  config.headers['Authorization'] = `token ${process.env.OAUTH_TOKEN}`
   return config
 }, error => {
   Promise.reject(error)
