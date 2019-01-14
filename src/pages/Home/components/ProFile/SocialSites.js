@@ -4,11 +4,16 @@ import CSSModules from 'react-css-modules'
 import styles from './SocialSites.css'
 
 class SocialSites extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
+    const { user } = this.props
     return (
       <div styleName="socialSitesContainer">
-        <a href="https://github.com/xukuanzhuo" target="_blank">github</a>
-        <a href="mailto:xukuanzhuo@gmail.com">email</a>
+        <a href={ user.htmlUrl } target="_blank">github</a>
+        <a href={ `mailto:${user.email}`}>email</a>
       </div>
     );
   }

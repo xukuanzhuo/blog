@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './Avator.css'
-
-// <img styleName="avatorImg" src='https://avatars1.githubusercontent.com/u/10184923?s=460&v=4' alt='avator' />
+import Skeleton from 'react-loading-skeleton'
 
 class Avator extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
+    const { user } = this.props
+
     return (
       <div styleName="avatorContainer">
+        {
+          user.avatarUrl ?
+          <img styleName="avatorImg" src={ user.avatarUrl } alt='avator' /> :
+          <Skeleton width={ 120 } height={ 120 } />
+        }
+
         <div styleName="avatorInfo">
-          <p styleName="avatorName">KZ Xu</p>
+          { user.name ? <p styleName="avatorName">{ user.name }</p> : <Skeleton count={ 1 } /> }
           <p styleName="avatorDesc">stay hungry,stay foolish.</p>
         </div>
       </div>
