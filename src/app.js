@@ -10,5 +10,5 @@ library.add(faIgloo)
 
 ReactDOM.render(
   Routes,
-  document.getElementById("app")
+  document.querySelector('.app')
 )

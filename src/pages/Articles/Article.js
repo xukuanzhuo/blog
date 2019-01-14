@@ -47,16 +47,19 @@ class Article extends Component {
     return (
       <div styleName="articlePage">
         { issue.title ?
-          <article>
-            <header>
-              <h1 styleName="articleHeaderTitle">{ issue.title  }</h1>
-              <div styleName="articleHeaderInfos">
-                <span>{ issue.user.login }</span>
-                <span> { issue.updatedAt }</span>
-              </div>
-            </header>
-            <section styleName="articleSubContent" dangerouslySetInnerHTML={{ __html: convert.makeHtml(issue.body) }} />
-          </article>
+          <div>
+            <article>
+              <header>
+                <h1 styleName="articleHeaderTitle">{ issue.title  }</h1>
+                <div styleName="articleHeaderInfos">
+                  <span>{ issue.user.login }</span>
+                  <span> { issue.updatedAt }</span>
+                </div>
+              </header>
+              <section styleName="articleSubContent" dangerouslySetInnerHTML={{ __html: convert.makeHtml(issue.body) }} />
+            </article>
+            <footer><a href={ issue.htmlUrl } target="_blank">Leave a comment</a></footer>
+          </div>
           : <ArticleSkeleton />
         }
       </div>

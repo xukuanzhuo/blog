@@ -2,8 +2,10 @@
 @value ArticleBg, ArticleTitle, ArticleContent, ArticleFooter from variables;
 
 .articlePage {
+  height: 100%;
   margin: 0 auto;
   padding: 15px;
+  background-color: ArticleBg;
 }
 
 @media only screen and (min-width: 700px) {

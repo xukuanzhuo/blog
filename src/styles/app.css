@@ -28,8 +28,9 @@ html, body {
   height: 100%;
   background-color: AppBg;
 }
-
 .pageContainer {
+  max-width: 980px;
+  height: 100%;
   margin: 0 auto;
 }
 
