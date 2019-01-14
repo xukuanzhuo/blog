@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './Avator.css'
 
-// <img styleName="avatorImg" src='https://avatars1.githubusercontent.com/u/10184923?s=460&v=4' alt='avator' />
-
 class Avator extends Component {
   constructor(props) {
     super(props)
