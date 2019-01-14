@@ -12,7 +12,7 @@ class SocialSites extends Component {
     const { user } = this.props
     return (
       <div styleName="socialSitesContainer">
-        <a href={ user.url } target="_blank">github</a>
+        <a href={ user.htmlUrl } target="_blank">github</a>
         <a href={ `mailto:${user.email}`}>email</a>
       </div>
     );
