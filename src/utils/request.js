@@ -6,7 +6,7 @@ const service = axios.create({
   timeout: 15000
 })
 
-const OAUTH_TOKEN = 'e90b0afc95244c70c8717c3a39fa6b20288a80f6'
+const OAUTH_TOKEN = 'd7dc966328824bec15d2146fbeb3cce3d57fa2ff'
 
 service.interceptors.request.use(config => {
   config.params = decamelizeKeys(config.params)
