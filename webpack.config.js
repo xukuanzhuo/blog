@@ -6,6 +6,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     filename: 'main.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
@@ -16,6 +17,11 @@ module.exports = {
       styles: path.resolve(__dirname, 'src/styles/'),
       pages: path.resolve(__dirname, 'src/pages/'),
       utils: path.resolve(__dirname, 'src/utils/')
+    }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
     }
   },
   module: {
