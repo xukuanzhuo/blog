@@ -1,8 +1,9 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
-module.exports = {
+module.exports = (env, argv) => ({
   entry: './src/app.js',
   output: {
     filename: 'main.js',
@@ -36,9 +37,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -67,9 +66,13 @@ module.exports = {
       template: "./public/index.html",
       filename: "./index.html"
     }),
+    new MiniCssExtractPlugin({
+        filename: "css/[name].css",
+        chunkFilename: "[id].css"
+    }),
     new Dotenv()
   ],
   devServer: {
     historyApiFallback: true
   }
-}
+})
