@@ -22,7 +22,9 @@ module.exports = (env, argv) => {
         src: path.resolve(__dirname, 'src/'),
         styles: path.resolve(__dirname, 'src/styles/'),
         pages: path.resolve(__dirname, 'src/pages/'),
-        utils: path.resolve(__dirname, 'src/utils/')
+        utils: path.resolve(__dirname, 'src/utils/'),
+        routes: path.resolve(__dirname, 'src/routes/'),
+        store: path.resolve(__dirname, 'src/store/')
       }
     },
     optimization: {
