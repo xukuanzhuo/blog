@@ -14,7 +14,9 @@ const history = createBrowserHistory()
 const Home = loadable(() => import('pages/Home'), { fallback: Loading })
 const Detail = loadable(() => import('pages/Articles/Article.js'), { fallback: Loading })
 const Editor = loadable(() => import('pages/Editor/Editor.js'), { fallback: Loading })
+
 const PracticeContext = loadable(() => import('pages/Practice/Context/Context.js'), { fallback: Loading })
+const PracticeForwardingRef = loadable(() => import('pages/Practice/ForwardingRef/ForwardingRef.js'), { fallback: Loading })
 
 const Routes = (
   <Provider store={store}>
@@ -25,6 +27,7 @@ const Routes = (
           <Route exact path="/articles/:id" component={props => <Detail {...props} />} />
           <Route exact path="/editor" component={props => <Editor {...props} />} />
           <Route exact path="/practice/context" component={props => <PracticeContext {...props} />} />
+          <Route exact path="/practice/forwardingref" component={props => <PracticeForwardingRef {...props} />} />
         </Switch>
       </div>
     </Router>
