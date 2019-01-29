@@ -17,6 +17,7 @@ const Editor = loadable(() => import('pages/Editor/Editor.js'), { fallback: Load
 
 const PracticeContext = loadable(() => import('pages/Practice/Context/Context.js'), { fallback: Loading })
 const PracticeForwardingRef = loadable(() => import('pages/Practice/ForwardingRef/ForwardingRef.js'), { fallback: Loading })
+const PracticeFragments = loadable(() => import('pages/Practice/Fragments/Fragments.js'), { fallback: Loading })
 
 const Routes = (
   <Provider store={store}>
@@ -28,6 +29,7 @@ const Routes = (
           <Route exact path="/editor" component={props => <Editor {...props} />} />
           <Route exact path="/practice/context" component={props => <PracticeContext {...props} />} />
           <Route exact path="/practice/forwardingref" component={props => <PracticeForwardingRef {...props} />} />
+          <Route exact path="/practice/fragments" component={props => <PracticeFragments {...props} />} />
         </Switch>
       </div>
     </Router>
