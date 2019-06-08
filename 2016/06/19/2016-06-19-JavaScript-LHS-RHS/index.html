@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> JavaScript中的LHS和RHS查询 · 前端</title><meta name="description" content="JavaScript中的LHS和RHS查询 - Xu KZ"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://xukuanzhuo.github.io/atom.xml" title="前端"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/avator.jpeg" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://twitter.com/alexXu35391753" target="_blank" class="nav-list-link">TWITTER</a></li><li class="nav-list-item"><a href="https://github.com/xukuanzhuo" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">JavaScript中的LHS和RHS查询</h1><div class="post-info">Jun 19, 2016</div><div class="post-content"><h3 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h3><p>程序中的源代码在执行之前会经历三个步骤:</p>
+<blockquote>
+<p>1、分词/词法分析；</p>
+<p>2、解析/语法分析(此步骤包含AST)；</p>
+<p>3、代码生成；</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="LHS-和-RHS"><a href="#LHS-和-RHS" class="headerlink" title="LHS 和 RHS"></a>LHS 和 RHS</h3><p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = 2</span><br></pre></td></tr></table></figure>
+
+<p>编译器会做如下处理:</p>
+<ul>
+<li><p>1、<code>var a</code>编译器会询问作用域是否已经存在该名称的变量，如果存在，编译器会忽略该声明，否则在当前作用域中声明一个新的变量，命名为<code>a</code>。</p>
+</li>
+<li><p>2、<code>a = 2</code>赋值操作，会询问当前作用域是否存在<code>a</code>变量，如果存在使用当前变量进行赋值操作。</p>
+</li>
+</ul>
+<p>我们的例子中，引擎会为变量<code>a</code>进行<code>LHS</code>查询，另一个查找类型叫做<code>RHS</code>。</p>
+<blockquote>
+<h5 id="LHS和RHS的含义是‘赋值操作的左侧或右侧’，并不意味着就是-赋值操作符的左侧或右侧，赋值操作还有其他几种形式。概念上最好理解为“赋值操作的目标是谁-LHS-”-以及-“谁是赋值操作的源头-RHS-”。"><a href="#LHS和RHS的含义是‘赋值操作的左侧或右侧’，并不意味着就是-赋值操作符的左侧或右侧，赋值操作还有其他几种形式。概念上最好理解为“赋值操作的目标是谁-LHS-”-以及-“谁是赋值操作的源头-RHS-”。" class="headerlink" title="LHS和RHS的含义是‘赋值操作的左侧或右侧’，并不意味着就是 = 赋值操作符的左侧或右侧，赋值操作还有其他几种形式。概念上最好理解为“赋值操作的目标是谁(LHS)” 以及 “谁是赋值操作的源头(RHS)”。"></a><code>LHS</code>和<code>RHS</code>的含义是‘赋值操作的左侧或右侧’，并不意味着就是 <code>=</code> 赋值操作符的左侧或右侧，赋值操作还有其他几种形式。概念上最好理解为“赋值操作的目标是谁(LHS)” 以及 “谁是赋值操作的源头(RHS)”。</h5></blockquote>
+<h3 id="为什么区分LHS和RHS很重要"><a href="#为什么区分LHS和RHS很重要" class="headerlink" title="为什么区分LHS和RHS很重要"></a>为什么区分LHS和RHS很重要</h3><p>考虑以下代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo (a) &#123;</span><br><span class="line">  console.log(a);</span><br><span class="line">  b =a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(a);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第一次对<code>b</code>进行<code>RHS</code>查询时是无法找到该变量的，这是一个“未声明”的变量。如果<code>RHS</code>在所嵌套的作用域中找不到该变量，就会抛出<code>ReferenceError</code> 异常，</p>
+<p>当引擎进行<code>LHS</code>查询时，如果在嵌套的作用域中直至全局作用域中也无法找到目标变量，如果不是严格模式下，就会在全局作用域中创建一个该名称的变量。</p>
+</blockquote>
+<blockquote>
+<p>LHS和RHS 顺序影响理解 <code>变量提示</code>、<code>作用域</code>、<code>This</code> 等</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Reference: <a href="https://github.com/xukuanzhuo/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch1.md" target="_blank" rel="noopener">You Don’t Know JS: Scope &amp; Closures</a></p>
+</blockquote>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/21/2018-11-21-Front-end-Engineering-Performance-Optimization/" class="prev">PREV</a></div><div class="copyright"><p>© 2015 - 2019 <a href="https://xukuanzhuo.github.io">Xu KZ</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

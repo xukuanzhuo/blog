@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 实现Javascript中的New操作符 · 前端</title><meta name="description" content="实现Javascript中的New操作符 - Xu KZ"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://xukuanzhuo.github.io/atom.xml" title="前端"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/avator.jpeg" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://twitter.com/alexXu35391753" target="_blank" class="nav-list-link">TWITTER</a></li><li class="nav-list-item"><a href="https://github.com/xukuanzhuo" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">实现Javascript中的New操作符</h1><div class="post-info">Dec 20, 2018</div><div class="post-content"><h3 id="new-运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例"><a href="#new-运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例" class="headerlink" title="new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例"></a><code>new</code> 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例</h3><h3 id="new-关键字会进行如下操作"><a href="#new-关键字会进行如下操作" class="headerlink" title="new 关键字会进行如下操作:"></a><code>new</code> 关键字会进行如下操作:</h3><ul>
+<li>创建一个空的简单JavaScript对象（即{}）；</li>
+<li>链接该对象（即设置该对象的构造函数）到另一个对象 ；</li>
+<li>将步骤1新创建的对象作为this的上下文 ；</li>
+<li>如果该函数没有返回对象，则返回this。</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function Car (make, model, year) &#123;</span><br><span class="line">  this.make = make</span><br><span class="line">  this.model = model</span><br><span class="line">  this.year = year</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>const myCar =  new Car(&#39;toyta&#39;, &#39;AE86&#39;, 1987)</code></p>
+<p><img src="https://i.loli.net/2019/04/24/5cbfd0854fdae.png" alt="myCar"></p>
+<h3 id="按照-new-关键字操作过程实现一个-newObject-函数"><a href="#按照-new-关键字操作过程实现一个-newObject-函数" class="headerlink" title="按照 new 关键字操作过程实现一个 newObject 函数"></a>按照 <code>new</code> 关键字操作过程实现一个 <code>newObject</code> 函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function newObject () &#123;</span><br><span class="line">  const obj = Object.create(null)                // 创建一个空obj</span><br><span class="line">  const constructor = [].shift.apply(arguments)  // 取出第一个参数(构造器函数)</span><br><span class="line">  obj.__proto__ = constructor.prototype          // 将 obj 的原型指向构造函数</span><br><span class="line">  constructor.apply(obj, arguments)              // 更改构造函数this指向到obj</span><br><span class="line">  return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>const myCar2 = newObject(Car, &#39;nissan&#39;, &#39;civic hatchback&#39;, 2019)</code></p>
+<p><img src="https://i.loli.net/2019/04/24/5cbfd09a61817.png" alt="myCar2"></p>
+<h4 id="hmmmmm-myCar和myCar2-看起来有些不一样-使用原型链的方法校验一下"><a href="#hmmmmm-myCar和myCar2-看起来有些不一样-使用原型链的方法校验一下" class="headerlink" title="hmmmmm myCar和myCar2 看起来有些不一样, 使用原型链的方法校验一下:"></a>hmmmmm <code>myCar</code>和<code>myCar2</code> 看起来有些不一样, 使用原型链的方法校验一下:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Object.getPrototypeOf(myCar) === Car.prototype  // true</span><br><span class="line">myCar.__proto__ === Car.prototype               // true</span><br><span class="line">myCar instanceof Car                            // true</span><br><span class="line"></span><br><span class="line">Object.getPrototypeOf(myCar2) === Car.prototype  // false</span><br><span class="line">myCar2.__proto__ === Car.prototype               // false</span><br><span class="line">myCar2 instanceof Car                            // false</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>myCar2</code> 没有在<code>Car</code>的原型链上, 更换创建空<code>obj</code>的实现方式为:<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const obj = new Object()</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>原因是 <code>Object.create(null)</code> 创建的是一个没有原型链链接的空对象，<code>new Object()</code> 类似于 <code>Object.create(Object.prototype)</code> 创建的是有原型链链接的空对象，</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = Object.create(null)</span><br><span class="line">var b = new Object()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Object.getPrototypeOf(a)  // null</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/04/24/5cbfc71547e67.png" alt="a"></p>
+<p>  <code>Object.getPrototypeOf(b) === Object.prototype // false</code></p>
+<ul>
+<li><code>Object.getPrototypeOf(b)</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/04/24/5cbfc74aaeb5a.png" alt="b"></p>
+<p>  <code>Object.getPrototypeOf(b) === Object.prototype // true</code></p>
+<blockquote>
+<p><code>a</code>是没有原型链链接的空对象，自然访问不到<code>__proto__</code> 属性，没有在原型链上，所以也可以用来做字典，不会有原型链上属性影响。</p>
+</blockquote>
+<h3 id="考虑Car函数有返回值的情况"><a href="#考虑Car函数有返回值的情况" class="headerlink" title="考虑Car函数有返回值的情况"></a>考虑<code>Car</code>函数有返回值的情况</h3><p>  我们需要<code>newObject</code>返回的是一个对象，所以对构造函数返回值进行判定</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const ret = constructor.apply(obj, arguments)</span><br><span class="line">return typeof ret === &apos;Object&apos; ? ret || obj : obj</span><br></pre></td></tr></table></figure>
+
+<p>  最终版本<code>newObject</code>:
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function newObject () &#123;</span><br><span class="line">  const obj = new Object()</span><br><span class="line">  const constructor = [].shift.apply(arguments)</span><br><span class="line">  obj.__proto__ = constructor.prototype</span><br><span class="line">  const ret = constructor.apply(obj, arguments)</span><br><span class="line">  return typeof ret === &apos;Object&apos; ? ret || obj : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const car1 = new Car(&apos;toyta&apos;, &apos;AE86&apos;, 1987)</span><br><span class="line">const car2 = newObject(Car, &apos;toyta&apos;, &apos;AE86&apos;, 1987)</span><br><span class="line"></span><br><span class="line">Car.prototype.wheels = 4</span><br><span class="line"></span><br><span class="line">car1.wheels = 4                                                // true</span><br><span class="line">car2.wheels = 4                                                // true</span><br><span class="line">car1 instanceof Car                                            // true</span><br><span class="line">car2 instanceof Car                                            // true</span><br><span class="line">Object.getPrototypeOf(car1) === Object.getPrototypeOf(car2)    // true</span><br></pre></td></tr></table></figure></p>
+<p> referrece: </p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new" target="_blank" rel="noopener">MDN new operator</a></li>
+<li><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md#createing-links" target="_blank" rel="noopener">You Don’t Know JS Object.create</a></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/21/2018-11-21-Front-end-Engineering-Performance-Optimization/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2019 <a href="https://xukuanzhuo.github.io">Xu KZ</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
